@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <title>Facebook</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -11,6 +12,27 @@
   </head>
 
   <body>
+
+    <nav class="h-14 border border-blue-500 border-solid  flex items-center bg-blue-800" >
+
+      <div class="brand ml-4 text-white font-bold text-3xl">
+        Facebook
+      </div>  
+        
+      <div class="w-full flex justify-end ">
+        <% if user_signed_in? %>
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "" %>
+        <% else %>
+          <%= link_to new_user_session_path do %>
+            <button class=" bg-green text-white bg mr-3 h-9 w-16 transform hover:scale-105 hover:bg-opacity-90 duration-100 rounded font-semibold border border-solid border-green-900">Sign in</button>
+          <% end %>
+        <% end %>
+      </div>
+     
+    </nav>
+  
+    
     <%= yield %>
+      
   </body>
 </html>
