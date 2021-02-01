@@ -1,0 +1,15 @@
+<%= content_for :stylesheets do %>
+	body {
+  		background: linear-gradient(to bottom, #F0F0F0 80%, white 20%);
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}	
+	
+	
+<% end %>
+
+<%= content_for :content do %>
+  <%= yield %>
+<% end %>
+
+<%= render template: 'layouts/application' %>

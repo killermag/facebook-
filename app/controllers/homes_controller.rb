@@ -1,4 +1,7 @@
 class HomesController < ApplicationController
-  def index
-  end
-end
+  layout 'home'
+  before_action :authenticate_user! 
+
+  def index 
+  end 
+end 

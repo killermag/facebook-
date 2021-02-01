@@ -2,6 +2,8 @@
 <html>
   <head>
 
+    <style type="text/css"><%= yield :stylesheets %></style>
+
     <title>Facebook</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -21,7 +23,7 @@
         
       <div class="w-full flex justify-end ">
         <% if user_signed_in? %>
-          <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "" %>
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'bg-green mr-2 h-8 pt-1 w-20 pl-2 rounded font-bold text-white border border-solid border-green-800' %>
         <% else %>
           <%= link_to new_user_session_path do %>
             <button class=" bg-green text-white bg mr-3 h-9 w-16 transform hover:scale-105 hover:bg-opacity-90 duration-100 rounded font-semibold border border-solid border-green-900">Sign in</button>
@@ -32,7 +34,8 @@
     </nav>
   
     
-    <%= yield %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
+
       
   </body>
 </html>
