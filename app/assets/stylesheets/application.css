@@ -17,6 +17,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 
+.input_fields {
+  width: 364px;
+  height: 50px;
+}
+
+.hr_width {
+  width: 340px;
+}
+
 
 
 
