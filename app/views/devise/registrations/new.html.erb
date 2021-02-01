@@ -1,5 +1,58 @@
+<%= form_with(model: resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class="flex  justify-center items-center mt-20">
+      
+      <div class="hidden sm:flex logo sm:flex-col  sm:justify-start sm:mr-10 sm:pr-36 sm:-mt-36">
+          <img width="250" height="100" src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="Facebook">
+          <div class="slogan ml-6 text-3xl pb-4 -my-4"><h2>Connect with friends and the world <br>
+          around you on Facebook.</h2></div>    
+      </div>
 
-  <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="login flex flex-col bg-white shadow-2xl space-y-4 items-center py-4 rounded-md">
+        <div class="place-self-start px-4">
+          <h2 class="font-semibold text-2xl">Sign up</h2>
+          <p class=" text-sm text-gray-500">It's quick and easy.</p>
+        </div>
+
+        <div class="w-full"> <hr> </div>
+
+        <div class="space-x-3 px-4">
+          <%= f.text_field :first, placeholder: 'First name', autofocus: true, autocomplete: "login", class: "bg-gray-100 w-44 h-10 px-3 border border-solid border-gray-300 focus:border-blue-400 focus:outline-none rounded-md"  %>
+          <%= f.text_field :last, placeholder: 'Last name', autofocus: true, autocomplete: "login", class: "bg-gray-100 w-44 h-10 px-3 border border-solid border-gray-300 focus:border-blue-400 focus:outline-none rounded-md"  %>
+        </div>
+
+        <div class="w-full px-4">
+          <%= f.password_field :password, autocomplete: "current-password",placeholder: 'Password', class: "bg-gray-100 w-full h-10 px-3 border border-solid border-gray-300 focus:border-blue-400 focus:outline-none rounded-md"  %>
+        </div>
+
+        <div class="w-full px-4">
+          <%= f.email_field :password, autocomplete: "email",placeholder: 'Email', class: "bg-gray-100 w-full h-10 px-3 border border-solid border-gray-300 focus:border-blue-400 focus:outline-none rounded-md"  %>
+        </div>
+
+
+        
+
+        <div class="text-sm text-gray-400">
+          <small> By clicking Sign Up, you agree to our Terms, Data Policy and Cookies <br> Policy. You may receive SMS Notifications from us and can opt <br> out any time.</small>
+        </div>
+
+        <div class="place-self-center">
+          <%= f.submit "Create an account", class: 'bg-green text-white font-semibold px-4 rounded-md h-10 border border-solid border-green cursor-pointer' %>
+        </div>
+
+        
+        
+        
+        
+      </div>
+
+
+    </div>
+<% end %>
+
+
+
+<!-- 
+<%= form_with(model: resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     
     <div class="flex sm:justify-center ">
@@ -42,31 +95,8 @@
     </div>
   <% end %>
 
-        
-<!-- 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
-        <div class="field flex flex-col justify-end">
-        </div>
-        <div class="field">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password", class: "border border-solid border-gray-300 focus:outline-none focus:ring" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border border-solid border-gray-300 focus:outline-none focus:ring" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "Create an account", class: 'w-52 bg-green text-white bg mr-3 h-9 hover:bg-opacity-90 duration-100 rounded font-semibold border border-solid border-green-900' %>
-        </div>
-        
-
-        
-    <% end %>
 -->
+  
+
+        
+
