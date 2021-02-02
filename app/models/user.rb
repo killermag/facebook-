@@ -1,5 +1,10 @@
 class User < ApplicationRecord
-  attr_accessor :login 
+  attr_accessor :login
+  attr_reader :genders 
+
+  def self.genders 
+    ['M','F','Custom']
+  end 
 
   
 

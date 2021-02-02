@@ -1,4 +1,7 @@
 <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  
+  <%= render "devise/shared/error_messages", resource: resource %>
+
   <div class="flex  justify-center items-center mt-20">
       
       <div class="hidden sm:flex logo sm:flex-col  sm:justify-start sm:mr-10 sm:pr-36 sm:-mt-36">
@@ -25,8 +28,30 @@
         </div>
 
         <div class="w-full px-4">
-          <%= f.email_field :password, autocomplete: "email",placeholder: 'Email', class: "bg-gray-100 w-full h-10 px-3 border border-solid border-gray-300 focus:border-blue-400 focus:outline-none rounded-md"  %>
+          <%= f.email_field :email, autocomplete: "email",placeholder: 'Email', class: "bg-gray-100 w-full h-10 px-3 border border-solid border-gray-300 focus:border-blue-400 focus:outline-none rounded-md"  %>
         </div>
+
+        <div class="w-full px-4">
+          <p class="text-sm text-gray-800">birthday</p>
+        </div>
+
+        <div class="w-full px-4 space-x-3">
+          <%= f.date_select :birthday, {}, class: 'border border-solid border-gray-300 rounded w-28 h-10' %>
+        </div>
+
+        <div class="w-full px-4">
+          <p class="text-sm text-gray-800">Gender</p>
+        </div>
+
+        <div class="flex w-full px-4 space-x-4">
+          <% User.genders.each do |gender| %>
+            <div class="border border-solid border-gray-300 flex flex-row items-center rounded w-28 justify-between px-2 h-10">
+              <p> <%= gender%> </p>
+              <%= f.radio_button :gender, gender %>
+            </div>
+          <% end %>
+        </div>
+        
 
 
         
@@ -39,7 +64,6 @@
           <%= f.submit "Create an account", class: 'bg-green text-white font-semibold px-4 rounded-md h-10 border border-solid border-green cursor-pointer' %>
         </div>
 
-        
         
         
         
