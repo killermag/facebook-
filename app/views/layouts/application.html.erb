@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    
+    <%= link_to 'sign out' , destroy_user_session_path, method: :delete %>
     <% if user_signed_in? %>
     <nav class="h-14 border border-blue-500 border-solid  flex items-center bg-white" >
 
@@ -59,16 +59,16 @@
       <!-- Navbar user controls -->
       <div class="flex mr-4 h-full items-center px-3 space-x-2 ">
 
-        <div class="current_user flex justify-between items-center space-x-2 hover:bg-gray-100 rounded-3xl px-1 h-12">
+        <div class="current_user flex justify-between items-center space-x-2 hover:bg-gray-100 rounded-3xl px-1 h-7 mr-2">
           <!-- User photo -->
           <div class="border-black bg-gray-700">
-          <img x="0" y="0" class="rounded-full h-10 w-14" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src="https://scontent-ort2-2.xx.fbcdn.net/v/t1.30497-1/c35.0.120.120a/p120x120/84241059_189132118950875_4138507100605120512_n.jpg?_nc_cat=1&ccb=2&_nc_sid=7206a8&_nc_ohc=p9OnxhNOvn4AX97lUx6&_nc_ht=scontent-ort2-2.xx&tp=27&oh=f09856717e5c2613710bf4e6d0b90b78&oe=603D3765">
+          <img x="0" y="0" class="rounded-full h-6 w-8" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src="https://scontent-ort2-2.xx.fbcdn.net/v/t1.30497-1/c35.0.120.120a/p120x120/84241059_189132118950875_4138507100605120512_n.jpg?_nc_cat=1&ccb=2&_nc_sid=7206a8&_nc_ohc=p9OnxhNOvn4AX97lUx6&_nc_ht=scontent-ort2-2.xx&tp=27&oh=f09856717e5c2613710bf4e6d0b90b78&oe=603D3765">
           </div>
           
           <!-- User name -->
           <div class="flex min-w-max"> 
-            <%= link_to current_user_path do %>
-              <%= current_user.username.split('_').join(' ') %> 
+            <%= link_to current_user_path, class: 'font-semibold text-sm' do %>
+              <%= current_user.username %>
             <% end %>
           </div>
         

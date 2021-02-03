@@ -20,7 +20,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       ## Rememberable
       t.datetime :remember_created_at
 
-
+      ## User attributes 
+      t.string :first 
+      t.string :last 
 
       t.timestamps null: false
     end

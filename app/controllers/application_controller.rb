@@ -29,15 +29,15 @@ class ApplicationController < ActionController::Base
 
   def set_username_from_first_and_last
     if params[:user]
-    params[:user][:username] = "#{params[:user][:first]}_#{params[:user][:last]}"
-    params[:user].delete(:first)
-    params[:user].delete(:last)
+    params[:user][:username] = "#{params[:user][:first]}#{params[:user][:last]}"
+    # params[:user].delete(:first)
+    # params[:user].delete(:last)
     end 
   end 
 
 
   def permit_params 
-    devise_parameter_sanitizer.permit(:sign_up) { |user| user.permit(:username, :password,:email, :gender, "birthday(3i)","birthday(2i)","birthday(1i)" ) }
+    devise_parameter_sanitizer.permit(:sign_up) { |user| user.permit(:first, :last, :username, :password,:email, :gender, "birthday(3i)","birthday(2i)","birthday(1i)" ) }
     devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :password_confirmation])
   end 
 end

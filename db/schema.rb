@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2021_02_01_193909) do
     t.datetime "reset_password_sent_at"
     t.string "provider"
     t.datetime "remember_created_at"
+    t.string "first"
+    t.string "last"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "gender"
