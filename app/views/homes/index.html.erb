@@ -3,6 +3,8 @@
   <!-- left -->
   <div class=" w-1/4 flex flex-col items-center" >
 
+    
+
     <%= link_to current_user_path, class: 'w-11/12 rounded flex items-center pl-4py-2 mt-2 hover:bg-gray-200 cursor-pointer' do %>
       <img x="0" y="0" class="rounded-full h-8 w-8 m-1" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
       <div class="pl-2 text-sm"> <%= current_user.formatted_name%> </div>
