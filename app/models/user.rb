@@ -1,25 +1,25 @@
 class User < ApplicationRecord
+
+  include UsersHelper
+
   attr_accessor :login
   attr_reader :genders 
 
-  def self.genders 
-    ['M','F','Custom']
-  end 
-
-  
+  has_many :posts 
+  has_many_attached :images 
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          authentication_keys: [:login]
   devise :omniauthable, omniauth_providers: %i[facebook]
-
-  validates_format_of :email, with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/
   
-  def self.from_omni_auth(auth)
-  end 
+  # VALIDATIONS 
 
+  validates :gender, :first, :last, presence: true 
+  validates_format_of :email, with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/
+
+  # Open metaclass and define the following method 
   class << self 
-
     def find_for_database_authentication warden_condition
       conditions = warden_condition.dup
       login = conditions.delete(:login)
@@ -28,13 +28,5 @@ class User < ApplicationRecord
         { value: login.strip.downcase}]).first
     end
   end 
-
-
-
-  private 
-
-  
-
-  
 
 end
