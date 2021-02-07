@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   
   resources :homes, only: :index
   resources :posts, except: [:show, :index]
-  resources :friends, only: [:index, :new, :create]
+  resources :friends, only: [:index, :new, :create, :destroy]
 
 end 

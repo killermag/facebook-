@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create(email: 'fifa@gmail.com', username: 'bestphi', password: 'fifafor')
-User.create(email: 'fif@gmail.com', username: 'bestph', password: 'fifafor')
-User.create(email: 'fi@gmail.com', username: 'bestp', password: 'fifafor')
-User.create(email: 'f@gmail.com', username: 'best', password: 'fifafor')
+User.new(email: 'fifa@gmail.com', username: 'bestphi', password: 'fifafor', first: 'foo', last: 'bar').save(validate: false)
+User.new(email: 'fif@gmail.com', username: 'bestph', password: 'fifafor', first: 'foo', last: 'bar').save(validate: false)
+User.new(email: 'fi@gmail.com', username: 'bestp', password: 'fifafor', first: 'foo', last: 'bar').save(validate: false)
+User.new(email: 'f@gmail.com', username: 'best', password: 'fifafor', first: 'foo', last: 'bar').save(validate: false)

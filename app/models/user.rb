@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   has_many :posts 
   has_many_attached :images 
+  has_many :requests_sent, class_name: 'Friend', foreign_key: :sender  
+  has_many :requests_received, class_name: 'Friend', foreign_key: :receiver 
+
+  scope :not_me, ->(me) { where('id <> ?', me.id) }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
