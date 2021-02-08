@@ -4,6 +4,7 @@ addEventListener("turbolinks:load", () => {
 
   if (UserInfo && dropdown) {
     UserInfo.addEventListener('click', () => {
+      closeNotifDropdown();
       dropdown.classList.toggle('hidden');
       dropdown.classList.toggle('flex');
     })
@@ -14,3 +15,12 @@ addEventListener("turbolinks:load", () => {
   
 });
 
+
+function closeNotifDropdown() {
+  let notificationDropdown = document.querySelector('.notifications-dropdown');
+  if (notificationDropdown.classList.contains('hidden')) {
+    return NaN;
+  } else {
+    notificationDropdown.classList.add('hidden');
+  };
+}

@@ -4,36 +4,36 @@
   
 </div>
 
-<div class="friends-containerflex flex-col bg-red-300 m-2">
+<div class="friends-container bg-white border border-solid border-gray-300 w-1/5 flex flex-col shadow m-2">
   <% if @received_requests.any? %>
     <span class="text-xs pl-2">Received Requests</span>
     
     <% @received_requests.each do |req| %>
-      <div class="flex w-1/5 p-2">
+      <div class="flex w-full p-2">
       
         <div class="profile-pic flex items-center pt-2" ><img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> ></div>
         <div class="username-and-request flex flex-col pl-4 w-full">
           <p class="font-medium"> <%= current_user.formatted_name %> </p>
           <div class="received-request w-full flex space-x-2">
             <!-- Button to accept friend -->
-            <%= link_to friends_path(friend_request_id: req.id), method: :post, class: 'w-1/2 bg-gray-400' do %>
-              <button class="bg-blue-500 w-full rounded text-white font-medium">Accept</button>
+            <%= link_to friends_path(friend_request_id: req.id), method: :post, class: 'w-1/2' do %>
+              <button class="py-1 w-full rounded text-white font-medium bg-blue-600">Accept</button>
             <% end %>
             <!-- Button to delete friend -->
             <%= link_to req, method: :delete, class: 'w-1/2' do %>
-              <button class="w-full rounded bg-gray-100 text-black font-medium">Cancel</button>
+              <button class="py-1 w-full rounded bg-gray-100 text-black font-medium">Cancel</button>
             <% end %>
           </div>
         </div>
       </div>
     <% end %>
 
-    <div class="w-1/5 flex justify-center mt-2"><hr class=" w-4/5"></div>
+    <div class="w-full flex justify-center mt-2"><hr class="w-4/5"></div>
   <% end %>
   <% if @sent_requests.any? %>
     <span class="text-xs pl-2 pt-2">Sent Friend requests</span>
     <% @sent_requests.each do |req| %>
-      <div class="flex bg-gray-300 w-1/5 p-2">
+      <div class="flex w-full p-2">
         <div class="profile-pic flex items-center pt-2" ><img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> ></div>
         <div class="username-and-request flex flex-col pl-4 w-full">
           <p class="font-medium"> <%= req.receiver.formatted_name %> </p>
@@ -45,13 +45,13 @@
         </div>
       </div>
     <% end %>
-    <div class="w-1/5 flex justify-center mt-2"><hr class=" w-4/5"></div>
+    <div class="w-full flex justify-center mt-2"><hr class=" w-4/5"></div>
   <% end %>
 
   <% if @users.any? %>
     <span class="text-xs pl-2 pt-2">People you may know</span>
     <% @users.each do |user| %>
-      <div class="flex bg-blue-300 w-1/5 p-2">
+      <div class="flex w-full p-2">
         <div class="profile-pic flex items-center pt-2" ><img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> ></div>
           <div class="username-and-request flex flex-col pl-4 w-full">
             <p class=" font-medium"> <%= user.formatted_name%> </p>
