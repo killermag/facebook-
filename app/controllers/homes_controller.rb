@@ -3,8 +3,12 @@ class HomesController < ApplicationController
   before_action :authenticate_user! 
 
   def index 
-    ActionCable.server.broadcast('notifications', {user: current_user})
     @posts = Post.all 
+    NotifChannel.broadcast_to(
+      current_user,
+      title: 'New things!',
+      body: 'All the news fit to print'
+    )
   end 
 end 
 
