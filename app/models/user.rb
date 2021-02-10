@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many_attached :images 
   has_many :requests_sent, class_name: 'Friend', foreign_key: :sender  
   has_many :requests_received, class_name: 'Friend', foreign_key: :receiver 
+  has_many :likes 
+  has_many :liked_posts, through: :likes, source: :post
 
   scope :not_me, ->(me) { where('id <> ?', me.id) }
 

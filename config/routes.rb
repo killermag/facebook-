@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
   resources :posts, except: [:show, :index]
   resources :friends, only: [:index, :new, :create, :destroy]
+  get 'likes', to: 'likes#create', as: :likes
 
 end 
