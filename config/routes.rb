@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   end 
   
-  resources :homes, only: :index
+  resources :homes, only: [:index]
   resources :posts, except: [:show, :index]
   resources :friends, only: [:index, :new, :create, :destroy]
 

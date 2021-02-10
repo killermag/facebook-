@@ -23,6 +23,7 @@ class FriendsController < ApplicationController
     new_friend_request = Friend.new(sender: current_user, receiver: receiver) 
     if new_friend_request.save!
       flash[:success] = 'Friend request sent!'
+      NotifChannel.broadcast_to(receiver, user: current_user); 
       redirect_to friends_path
     else 
       flash.now[:error] = 'friend request couldnt be sent unfortunately.'
