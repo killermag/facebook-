@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :requests_received, class_name: 'Friend', foreign_key: :receiver 
   has_many :likes 
   has_many :liked_posts, through: :likes, source: :post
+  has_many :comments
+  has_many :comment_posts, through: :comments, source: :post 
 
   scope :not_me, ->(me) { where('id <> ?', me.id) }
 

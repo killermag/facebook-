@@ -3,7 +3,7 @@ class HomesController < ApplicationController
   before_action :authenticate_user! 
 
   def index 
-    @posts = Post.all 
+    @posts = Post.all.includes :comments, :likes
   end 
 
 end 

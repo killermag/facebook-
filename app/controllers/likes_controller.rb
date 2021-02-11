@@ -4,8 +4,9 @@ class LikesController < ApplicationController
     # Check if the post is already liked 
     # Dynamically create like and unlike post links 
     # catch error below. 
-    if params["post"].to_i
-      post = Post.find(params["post"]) 
+
+    if params["post"][0].to_i
+      post = Post.find(params["post"][0]) 
       if post 
         @like = Like.new(user: current_user, post: post)
         if @like.save 
@@ -24,6 +25,17 @@ class LikesController < ApplicationController
   end 
 
   def destroy 
+    params = CGI.parse(URI.parse(request.url).query)
+
+    if params["post"][0].to_i
+      @like = Like.find_by(user: current_user, post: Post.find(params["post"][0]))
+      @like.destroy!
+      flash[:success] = "Unliked post."
+      redirect_to homes_path
+    else 
+      flash.now[:error] = "Unable to process your request."
+      render homes_path
+    end 
   end 
   
 end

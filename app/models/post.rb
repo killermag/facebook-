@@ -3,6 +3,9 @@ class Post < ApplicationRecord
   belongs_to :user 
   has_many :likes 
   has_many :liked_by, through: :likes, source: :user 
+  has_many :comments
+  has_many :comment_author, through: :comments, source: :user 
+
 
 
   def when 
