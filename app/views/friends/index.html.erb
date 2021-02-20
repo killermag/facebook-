@@ -4,18 +4,26 @@
   
 </div>
 
-<div class="friends-container bg-white border border-solid border-gray-300 w-1/5 flex flex-col shadow m-2">
+<div class="friends-container bg-white border border-solid border-gray-300 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex flex-col shadow m-2">
 
   <% if @received_requests.any? %>
-  
     <span class="received-text text-xs pl-2">Received Requests</span>
-    
     <% @received_requests.each do |req| %>
       <div class="received-div flex w-full p-2">
-      
-        <div class="profile-pic flex items-center pt-2" ><img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> ></div>
+        
+        <%= link_to user_path req.sender do %>
+          <div class="profile-pic flex items-center pt-2" >  
+            <% if req.sender.profile_picture.attached? %>
+              <%= image_tag req.sender.profile_picture, class: 'rounded-full h-9 w-10' %>
+            <% else %>
+              <img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
+            <% end %>
+          </div>
+        <% end %>
         <div class="username-and-request flex flex-col pl-4 w-full">
-          <p class="font-medium"> <%= current_user.formatted_name %> </p>
+          <%= link_to user_path req.sender do %>
+            <p class="font-medium"> <%= current_user.formatted_name %> </p>
+          <% end %>
           <div class="received-request w-full flex space-x-2">
             <!-- Button to accept friend -->
             <%= link_to friends_path(friend_request_id: req.id), method: :post, class: 'w-1/2' do %>
@@ -28,9 +36,7 @@
           </div>
         </div>
       </div>
-
     <% end %>
-
     <div class="w-full flex justify-center mt-2"><hr class="w-4/5"></div>
   <% end %>
 
@@ -38,9 +44,13 @@
     <span class="text-xs pl-2 pt-2">Sent Friend requests</span>
     <% @sent_requests.each do |req| %>
       <div class="flex w-full p-2">
-        <div class="profile-pic flex items-center pt-2" ><img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> ></div>
+        <%= link_to user_path(req.receiver) do %>
+          <div class="profile-pic flex items-center pt-2" > <% if req.receiver.profile_picture.attached? %> <%= image_tag req.receiver.profile_picture, class: 'rounded-full h-9 w-10' %>  <% else %>     <img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %>> <% end %> </div>
+        <% end %>
         <div class="username-and-request flex flex-col pl-4 w-full">
-          <p class="font-medium"> <%= req.receiver.formatted_name %> </p>
+          <%= link_to user_path req.receiver do %>
+            <p class="font-medium"> <%= req.receiver.formatted_name %> </p>
+          <% end %>
           <div class="sent-request w-full">
             <%= link_to req, method: :delete do %>
               <button class="bg-gray-200 text-black font-semibold w-full rounded py-1">Cancel Friend request</button>
@@ -56,9 +66,13 @@
     <span class="text-xs pl-2 pt-2">People you may know</span>
     <% @users.each do |user| %>
       <div class="users flex w-full p-2">
-        <div class="profile-pic flex items-center pt-2" ><img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> ></div>
+        <%= link_to user_path user, class: 'pt-2' do %>
+          <div class="profile-pic flex items-center pt-4" > <% if user.profile_picture.attached? %> <%= image_tag user.profile_picture, class: 'rounded-full h-9 w-10' %>  <% else %> <img x="0" y="0" class="rounded-full h-9 w-10" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> <% end %> ></div>
+        <% end %>
           <div class="username-and-request flex flex-col pl-4 w-full">
-            <p class="username font-medium"> <%= user.formatted_name%> </p>
+            <%= link_to user_path user do %>
+              <p class="username font-medium"> <%= user.formatted_name%> </p>
+            <% end %>
             <div class="new-request w-full">
               <%= link_to new_friend_path(receiver: user.id) do %>
                 <button class="bg-blue-700 text-white font-semibold w-full rounded py-1">Send Friend Request</button>

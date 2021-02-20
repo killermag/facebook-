@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     redirect_to current_user_path
   end 
 
+  def show 
+    current_user = User.find(params[:id])
+    render :show, locals: { current_user: current_user }
+  end 
+
   private 
   
   def cover_parmas 
