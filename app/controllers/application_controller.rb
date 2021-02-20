@@ -1,10 +1,11 @@
 class ApplicationController < ActionController::Base
-  layout 'register'
   before_action :set_username_from_first_and_last, if: :making_a_new_user 
   before_action :permit_params, if: :devise_controller?
 
 
   private 
+
+
 
   def after_sign_up_path_for(resource)
   	new_user_sessions_path

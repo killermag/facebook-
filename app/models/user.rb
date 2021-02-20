@@ -6,6 +6,8 @@ class User < ApplicationRecord
   attr_reader :genders 
 
   has_many :posts 
+  has_one_attached :cover 
+  has_one_attached :profile_picture
   has_many_attached :images 
   has_many :requests_sent, class_name: 'Friend', foreign_key: :sender  
   has_many :requests_received, class_name: 'Friend', foreign_key: :receiver 
@@ -20,6 +22,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          authentication_keys: [:login]
   devise :omniauthable, omniauth_providers: %i[facebook]
+
   
   # VALIDATIONS 
 
@@ -35,6 +38,23 @@ class User < ApplicationRecord
         ["lower(username) = :value OR lower(email) = :value",
         { value: login.strip.downcase}]).first
     end
+
+    def from_omniauth(auth)
+     # name = auth.info.name.split(" ")
+     # user = User.where(email: auth.info.email).first 
+     # user ||= User.create!(provider: auth.provider, uid: auth.uid, last: name[1], first: name[0], username: name, password: Devise.friendly_token[0,20])
+     # user
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user| 
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0, 20]
+        user.username = auth.info.name
+        user.provider = auth.provider
+        user.uid = auth.uid 
+        user.first = auth.info.first_name 
+        user.last = auth.info.last_name 
+        user.save!(validate: false)
+      end 
+    end 
   end 
 
 end

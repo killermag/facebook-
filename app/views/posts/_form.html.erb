@@ -1,6 +1,11 @@
 <%= javascript_pack_tag 'image_upload' %> 
 <div class="flex items-center justify-center">
   <%= form_with model: @post, class: 'bg-white mt-40 w-1/4 rounded-lg shadow-2xl' do |f| %>
+  
+    <% if request.query_parameters[:redirect] %>
+      <%= f.hidden_field :redirect, value: false %>
+    <% end %>
+
     <div class="flex flex-col items-center mx-2 my-4 space-y-3">
       <div class="text-xl font-semibold"> <%= action_name == 'edit' ? 'Edit post' : 'Create post' %> </div> 
       <div class="w-full pb-3"><hr></div>

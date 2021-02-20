@@ -1,5 +1,13 @@
-let image_div = document.querySelector('.image-div');
+let cover_form = document.querySelector('#cover_form'); 
+let file_upload = document.querySelector('#user_cover'); 
 
-image_div.addEventListener('click', () => { document.querySelector('#image-upload').click() })
+file_upload.addEventListener('change', () => {
+  cover_form.submit().click(); 
+});
+
+cover_form.addEventListener('click', () => {
+  file_upload.click(); 
+});
+
 
 

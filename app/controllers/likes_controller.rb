@@ -11,7 +11,11 @@ class LikesController < ApplicationController
         @like = Like.new(user: current_user, post: post)
         if @like.save 
           flash[:success] = "Liked post."
-          redirect_to homes_path
+          if request.query_parameters[:redirect]
+            redirect_to current_user_path
+          else 
+            redirect_to homes_path
+          end 
         else 
           flash.now[:error] = "Unable to process request."
           render "homes/index"
@@ -31,7 +35,11 @@ class LikesController < ApplicationController
       @like = Like.find_by(user: current_user, post: Post.find(params["post"][0]))
       @like.destroy!
       flash[:success] = "Unliked post."
-      redirect_to homes_path
+      if request.query_parameters[:redirect]
+        redirect_to current_user_path
+      else 
+        redirect_to homes_path
+      end 
     else 
       flash.now[:error] = "Unable to process your request."
       render homes_path

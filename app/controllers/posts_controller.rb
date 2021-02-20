@@ -24,10 +24,14 @@ class PostsController < ApplicationController
   def update 
     @post = Post.find(params[:id])
     @post.body = params[:post][:body] 
-    @post.image = params[:post][:image]
+    @post.image = params[:post][:image] unless params[:post][:image].nil? 
 
     if @post.save 
-      redirect_to homes_path, success: 'Edited Post'
+      if params[:post][:redirect]
+        redirect_to current_user_path 
+      else 
+        redirect_to homes_path, success: 'Edited Post'
+      end 
     else
       flash.now[:error] = 'Couldn\'t edit post' 
       render 'edit'
@@ -36,9 +40,12 @@ class PostsController < ApplicationController
   end 
 
   def destroy 
-    Post.find(params[:id]).destroy 
-
-    redirect_to homes_path, success: 'Deleted Post'
+    Post.find(params[:id].to_s).destroy 
+    if request.query_parameters[:redirect] 
+      redirect_to current_user_path 
+    else 
+      redirect_to homes_path, success: 'Deleted Post'
+    end 
   end 
 
   private 

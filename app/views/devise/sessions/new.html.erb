@@ -8,6 +8,13 @@
     </div>
 
     <div class="login flex flex-col bg-white shadow-2xl space-y-4 px-4 items-center py-4 rounded-md">
+
+      <%= link_to user_facebook_omniauth_authorize_path, method: :post, id: 'facebook-login', class: 'hover:bg-gray-100 flex justify-center items-center input_fields rounded bg-white  ' do %>
+        <span class="bg-whtie text-blue-600 font-semibold text-lg">Sign in with facebook</span>
+      <% end %>
+
+      <div class="flex items-center justify-center pb-2"> <hr class="hr_width"> </div>
+
       <div >
         <%= f.text_field :login,placeholder: 'Email or Username', autofocus: true, autocomplete: "login", class: "input_fields px-3 border border-solid border-gray-300 focus:border-blue-400 focus:outline-none rounded-md"  %>
       </div>
@@ -34,6 +41,8 @@
           <button class="bg-green text-white rounded-md h-12 px-4 text-lg font-semibold">Create a new account</button>
         <% end %>
       </div>
+
+
 
       
       

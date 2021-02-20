@@ -296,8 +296,8 @@ DEPENDENCIES
   guard-minitest (= 2.4.4)
   jbuilder (~> 2.7)
   listen (~> 3.3)
-  omniauth-facebook (~> 8.0)
-  omniauth-rails_csrf_protection (~> 1.0)
+  omniauth-facebook
+  omniauth-rails_csrf_protection
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

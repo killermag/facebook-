@@ -4,7 +4,11 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build comment_params
     if @comment.save 
       flash[:success] = 'Comment created.'
-      redirect_to homes_path
+      if params[:comment][:redirect]
+        redirect_to current_user_path
+      else 
+        redirect_to homes_path
+      end 
     else 
       flash.now[:error] = 'Unable to process comment.'
       render homes_path
@@ -16,7 +20,11 @@ class CommentsController < ApplicationController
     @comment = Comment.find params[:id]
     if @comment.destroy! 
       flash[:success] = "Comment deleted."
-      redirect_to homes_path 
+      if params[:comment][:redirect]
+        redirect_to current_user_path
+      else 
+        redirect_to homes_path
+      end 
     else 
       flash.now[:error] = 'Unable to process comment request.'
       render 'homes/index'
@@ -25,7 +33,11 @@ class CommentsController < ApplicationController
 
   def edit 
     @posts = Post.all.includes :comments, :likes
-    render 'homes/index'
+    if request.query_parameters[:redirect]
+      render 'users/me'
+    else 
+      render 'homes/index'
+    end 
   end 
 
   def update 
@@ -36,7 +48,11 @@ class CommentsController < ApplicationController
     else 
       flash[:error] = "Unable to process comment request."
     end 
-    redirect_to homes_path
+    if params[:comment][:redirect]
+      redirect_to current_user_path
+    else 
+      redirect_to homes_path
+    end 
   end 
 
   private

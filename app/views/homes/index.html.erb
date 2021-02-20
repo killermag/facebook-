@@ -136,7 +136,7 @@
           <!-- Show image or video if any with for the post -->
           <div class="file-div">
             <% if post.image_attachment %>
-              <div class="pb-20"><%= image_tag post.image, width: '100%' %></div>
+              <div class="pb-2"><%= image_tag post.image, width: '100%' %></div>
             <% end %>
           </div>
 
@@ -188,12 +188,10 @@
           <%= form_with model: [post,Comment.new], method: :get, class: 'flex mx-4' do |f| %>
             <%= f.text_field :body, class: "px-2 border border-solid border-gray-300 rounded-3xl bg-gray-100 outline-none w-full", placeholder: 'Comment' %>
 
-
           <% end %>
 
           <!-- Show all post comments -->
           <div class="all-comments flex flex-col mx-4 mt-2 space-y-2 py-2">
-          <% post.comments.each do |comment| %>
             
             
            
@@ -228,7 +226,7 @@
                 <div class="font-light bg-gray-100 rounded-md px-1"> <%= comment.body %> </div>
               <% end %>
             <% end %>
-          <% end %>
+
                
 
                 
@@ -251,4 +249,3 @@
 </div>
 
 
-<%= params %>

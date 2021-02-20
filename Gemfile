@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
+gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection"
 
 
 group :development, :test do
@@ -69,5 +71,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rexml", "~> 3.2"
 
-gem 'omniauth-facebook', '~> 8.0'
-gem 'omniauth-rails_csrf_protection', '~> 1.0'
