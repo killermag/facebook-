@@ -1,45 +1,47 @@
 <div class="flex justify-center  h-screen">
-  <div class="flex flex-col w-full lg:w-2/4 md:w-3/4 h-full  bg-white">
+  <div class="flex flex-col w-full lg:w-2/4 md:w-3/4 h-full  ">
 
     <!-- cover form -->
-      <%= form_with model: current_user, method: :post, url: cover_path, id: 'cover_form', class: 'flex items-center justify-center bg-blue-50 rounded cursor-pointer' do |f| %>
+    <% if @user.id == current_user.id %>
+      <%= form_with model: @user, method: :post, url: cover_path, id: 'cover_form', class: 'flex items-center justify-center bg-blue-50 rounded cursor-pointer' do |f| %>
         <%= f.file_field :cover, class: "hidden" %>
         <div class="text-blue-600 font-semibold">Add cover</div>
         <%= f.submit '', class: 'hidden' %>
       <% end %>
+    <% end %>
 
     <!-- cover display -->
     <div class="cover bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 h-2/4">
-      <% if current_user.cover.attached? %> 
-        <%= image_tag current_user.cover, class: 'w-full h-full' %>
+      <% if @user.cover.attached? %> 
+        <%= image_tag @user.cover, class: 'w-full h-full' %>
       <% end  %>
     </div>
 
 
     <!-- profile pic display -->
-    <div class="flex justify-center bg-pink-100 ">
-      <div id="profile_pic" class="profile_picture bg-black w-28 h-28 rounded-full border-2 border-solid border-purple-200 relative -top-20">
-        <% if current_user.profile_picture.attached? %>
-          <%= image_tag current_user.profile_picture, class: 'w-full h-full rounded-full' %>
+    <div class="flex justify-center ">
+      <div id="profile_pic" class="profile_picture bg-black w-28 h-28 rounded-full border-2 border-solid border-white relative -top-20">
+        <% if @user.profile_picture.attached? %>
+          <%= image_tag @user.profile_picture, class: 'w-full h-full rounded-full' %>
         <% end %>
 
       </div>
     </div>
 
     <!-- me posts display -->
-    <div class="w-full flex flex-col items-center">
-      <% current_user.posts.each do |post| %>
+    <div class="w-full flex flex-col items-center relative -top-10">
+      <% @user.posts.each do |post| %>
         <div class="w-2/3 flex flex-col justify-center bg-white rounded shadow my-2 border border-solid border-gray-200">
           
           <!-- Show user image, user's name and post dropdown -->
           <div class="user-name flex ml-4 mt-1 pt-2"> 
-            <%= link_to current_user_path do %>
+            <%= link_to @user_path do %>
               <img x="0" y="0" class="rounded-full h-7 w-7" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> > 
             <% end %>
             <div class="ml-2  flex justify-between leading-5 w-full"> 
               <div class="flex flex-col">
                 <span class="font-semibold hover:underline">
-                  <%= link_to current_user_path do %> 
+                  <%= link_to @user_path do %> 
                     <%= post.user.formatted_name %> 
                   <% end %>
                 </span>
@@ -48,7 +50,7 @@
               </div>
 
               
-              <% if post.user == current_user %>
+              <% if post.user == @user %>
                 <!-- Posts dropdown -->
                 <div class="open-dropdown post-dropdown-toggle mr-2 rounded-full hover:bg-gray-200 h-10 w-10 flex justify-center items-center cursor-pointer select-none">
                   <div class="hidden post-dropdown flex flex-col w-1/6 h-24 bg-white rounded border border-solid border-gray-200 shadow absolute right-1/3 mr-10 mt-8">
@@ -112,7 +114,7 @@
 
           <!-- Like or comment on a post -->
           <div class="flex mx-4 mb-2 justify-evenly ">
-            <% if current_user.liked_posts.include?(post) %>
+            <% if @user.liked_posts.include?(post) %>
               <%= link_to likes_path(post: post.id, redirect: false), class: "flex items-center rounded hover:bg-gray-100 w-full justify-center cursor-pointer", method: :delete do %>
                 <svg class="inline w-6 h-6 mr-1 mb-1 self-center  text-blue-600 stroke-2 stroke-current text-secondarygray" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                   <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
@@ -156,8 +158,8 @@
               <div class="flex items-center">
                 <div><img x="0" y="0" class="rounded-full h-5 w-5" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> ></div>
                 <div class="pl-1 text-xs font-light text-gray-600 w-full flex justify-between"> 
-                  <p class="truncate"> <%= current_user.username %> </p> 
-                  <% if comment.user == current_user %>
+                  <p class="truncate"> <%= @user.username %> </p> 
+                  <% if comment.user == @user %>
                     <div class="comment-dropdown-toggler rounded-full hover:bg-gray-200 cursor-pointer">
                       <svg class="inline self-center w-6 h-6 text-secondarygray fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>

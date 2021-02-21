@@ -29,8 +29,7 @@ class UsersController < ApplicationController
   end 
 
   def show 
-    current_user = User.find(params[:id])
-    render :show, locals: { current_user: current_user }
+    @user = User.find(params[:id])
   end 
 
   private 

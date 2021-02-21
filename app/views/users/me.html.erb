@@ -21,8 +21,8 @@
     </div>
 
     <!-- Change profile button -->
-    <%= form_with model: current_user, method: :post, url: profile_picture_path, class: 'change_profile flex justify-center pt-4' do |f|  %>
-      <button class="bg-blue-600 text-white px-2 py-0.5 rounded font-semibold">Change profile pic</button>
+    <%= form_with model: current_user, method: :post, url: profile_picture_path, id: 'profile_form', class: 'change_profile flex justify-center pt-4' do |f|  %>
+      <div id="me_profile" class="bg-blue-600 text-white px-2 py-0.5 rounded font-semibold cursor-pointer">Change profile pic</div>
       <%= f.file_field :profile_picture, class: 'hidden' %>
       <%= f.submit 'sub', class: "hidden" %>
     <% end %>
@@ -42,7 +42,7 @@
 
     <!-- Change cover button -->
     <%= form_with model: current_user, method: :post, url: cover_path, id: 'cover_form', class: 'change_profile flex justify-center pt-4' do |f| %>
-      <button class="bg-blue-600 text-white px-2 py-0.5 rounded font-semibold">Change cover pic</button>
+      <div class="bg-blue-600 text-white px-2 py-0.5 rounded font-semibold cursor-pointer" id="me_cover">Change cover pic</div>
       <%= f.file_field :cover, class: 'hidden' %>
       <%= f.submit 'sub', class: 'hidden' %>
     <% end %>
@@ -83,4 +83,5 @@
 
   </div>
 </div>
-<%= javascript_pack_tag 'image_upload' %>
+<%= javascript_pack_tag 'me_profile' %>
+<%= javascript_pack_tag 'me_cover' %>

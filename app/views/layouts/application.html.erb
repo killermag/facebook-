@@ -70,7 +70,11 @@
           <div class="current_user flex justify-between items-center space-x-2 hover:bg-gray-100 rounded-3xl px-1 h-7 mr-2">
             <!-- User photo -->
             <div class="border-black">
-            <img x="0" y="0" class="rounded-full h-6 w-8" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
+            <% if current_user.profile_picture.attached? %>
+              <%= image_tag current_user.profile_picture, class: 'rounded-full h-6 w-8' %>
+            <% else %>
+              <img x="0" y="0" class="rounded-full h-6 w-8" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
+            <% end %>
             </div>
             
             <!-- User name -->
@@ -111,7 +115,11 @@
             <%= link_to current_user_path, class: 'hover:bg-gray-100' do %>
               <div class="your-profile flex items-center justify-center"> 
                 <div class="profile-image ml-2 pt-2 pb-2">
-                  <img x="0" y="0" class="rounded-full h-8 sm:h-12 lg:h-13 w-16" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
+                  <% if current_user.profile_picture.attached? %>
+                    <%= image_tag current_user.profile_picture, class: 'rounded-full h-8 sm:h-12 lg:h-13 w-14' %>
+                  <% else %>
+                    <img x="0" y="0" class="rounded-full h-8 sm:h-12 lg:h-13 w-16" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
+                  <% end %>
                 </div> 
                 
                 <div class="view-profile w-full  h-full overflow-hidden">

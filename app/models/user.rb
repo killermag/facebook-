@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   scope :not_me, ->(me) { where('id <> ?', me.id) }
 
+
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          authentication_keys: [:login]
@@ -31,6 +33,10 @@ class User < ApplicationRecord
 
   def updating? 
     self.persisted? ? true : false 
+  end 
+
+  def friends 
+    requests_received.where(accepted: true).pluck(:id) + requests_sent.where(accepted: true).pluck(:id) + [self.id]
   end 
 
   # Open metaclass and define the following method 
