@@ -26,8 +26,12 @@ class User < ApplicationRecord
   
   # VALIDATIONS 
 
-  validates :gender, :first, :last, presence: true 
+  validates :gender, :first, :last, presence: true, unless: :updating? 
   validates_format_of :email, with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/
+
+  def updating? 
+    self.persisted? ? true : false 
+  end 
 
   # Open metaclass and define the following method 
   class << self 

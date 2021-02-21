@@ -111,7 +111,7 @@
             <%= link_to current_user_path, class: 'hover:bg-gray-100' do %>
               <div class="your-profile flex items-center justify-center"> 
                 <div class="profile-image ml-2 pt-2 pb-2">
-                  <img x="0" y="0" class="rounded-full h-14 w-16" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
+                  <img x="0" y="0" class="rounded-full h-8 sm:h-12 lg:h-13 w-16" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
                 </div> 
                 
                 <div class="view-profile w-full  h-full overflow-hidden">

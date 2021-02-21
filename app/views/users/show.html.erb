@@ -2,11 +2,11 @@
   <div class="flex flex-col w-full lg:w-2/4 md:w-3/4 h-full  bg-white">
 
     <!-- cover form -->
-    <%= form_with model: current_user, method: :post, url: cover_path, id: 'cover_form', class: 'flex items-center justify-center bg-blue-50 rounded cursor-pointer' do |f| %>
-      <%= f.file_field :cover, class: "hidden" %>
-      <div class="text-blue-600 font-semibold">Add cover</div>
-      <%= f.submit '', class: 'hidden' %>
-    <% end %>
+      <%= form_with model: current_user, method: :post, url: cover_path, id: 'cover_form', class: 'flex items-center justify-center bg-blue-50 rounded cursor-pointer' do |f| %>
+        <%= f.file_field :cover, class: "hidden" %>
+        <div class="text-blue-600 font-semibold">Add cover</div>
+        <%= f.submit '', class: 'hidden' %>
+      <% end %>
 
     <!-- cover display -->
     <div class="cover bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 h-2/4">
