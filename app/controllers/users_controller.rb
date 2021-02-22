@@ -14,12 +14,17 @@ class UsersController < ApplicationController
 
   def me 
     @posts = Post.all.includes :likes, :comments, :image_attachment
+
   end 
 
   def cover
     current_user.cover.attach params[:user][:cover]
     current_user.save!(validate: false)
-    redirect_to current_user_path
+    if request.query_parameters[:redirect]
+      redirect_to user_path current_user
+    else
+      redirect_to current_user_path
+    end 
   end 
 
   def profile_picture 

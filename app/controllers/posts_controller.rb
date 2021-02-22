@@ -8,6 +8,18 @@ class PostsController < ApplicationController
   def create 
     @post = current_user.posts.build post_params 
 
+    storage = Google::Cloud::Storage.new(
+      project_id: "My First Project",
+      credentials: "../../keyfile.json"
+    )
+    bucket = storage.bucket "odin_facebook"
+    file = bucket.file "path/to/my-file.ext"
+    # Download the file to the local file system
+    file.download "/tasks/attachments/#{file.name}"
+    # Copy the file to a backup bucket
+    backup = storage.bucket "task-attachment-backups"
+    file.copy backup, file.name
+
     if @post.save 
       redirect_to homes_path, success: 'Post created'
     else 
