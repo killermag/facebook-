@@ -131,5 +131,8 @@ Rails.application.configure do
   }
 
   config.active_storage.service = :google
+  config.assets.js_compressor = :uglifier
+
+  config.assets.js_compressor = Uglifier.new(harmony: true)
 
 end
