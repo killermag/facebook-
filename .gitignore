@@ -40,4 +40,4 @@ yarn-debug.log*
 /spring/*.pid
 
 # Ignore GCS keyfile 
-gcs.keyfile
+gcs_keyfile.json

@@ -19,7 +19,7 @@ local:
 google:
   service: GCS
   project: "My First Project"
-  credentials: <%= Rails.root.join("gcs.keyfile") %>
+  credentials: <%= ENV['GOOGLE_APP_CREDENTIALS'].as_json %>
   bucket: odin_facebook
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
