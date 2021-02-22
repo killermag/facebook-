@@ -34,3 +34,12 @@ body {
   background: #F0F0F0;
 }
 
+.-top-user_info {
+  top: -7.3rem;
+  z-index: -10000;
+}
+
+
+.z-under {
+  z-index: -10000000000;
+}

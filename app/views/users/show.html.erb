@@ -3,17 +3,17 @@
 
     <!-- cover form -->
     <% if @user.id == current_user.id %>
-      <%= form_with model: @user, method: :post, url: cover_path, id: 'cover_form', class: 'flex items-center justify-center bg-blue-50 rounded cursor-pointer' do |f| %>
+      <%= form_with model: @user, method: :post, url: cover_path(redirect: false), id: 'cover_form', class: 'flex items-center justify-center bg-blue-600 cursor-pointer rounded-sm py-1' do |f| %>
         <%= f.file_field :cover, class: "hidden" %>
-        <div class="text-blue-600 font-semibold">Add cover</div>
+        <div class="text-white font-semibold">Add cover</div>
         <%= f.submit '', class: 'hidden' %>
       <% end %>
     <% end %>
 
     <!-- cover display -->
-    <div class="cover bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 h-2/4">
+    <div class="cover bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 h-2/4 rounded-b-md">
       <% if @user.cover.attached? %> 
-        <%= image_tag @user.cover, class: 'w-full h-full' %>
+        <%= image_tag @user.cover, class: 'w-full h-full rounded-b-md' %>
       <% end  %>
     </div>
 
@@ -23,6 +23,8 @@
       <div id="profile_pic" class="profile_picture bg-black w-28 h-28 rounded-full border-2 border-solid border-white relative -top-20">
         <% if @user.profile_picture.attached? %>
           <%= image_tag @user.profile_picture, class: 'w-full h-full rounded-full' %>
+        <% else %>
+          <%= image_tag User.default_profile_pic, class: 'w-full h-full rounded-full' %>
         <% end %>
 
       </div>
@@ -205,4 +207,4 @@
 
 <%= javascript_pack_tag 'post' %>
 <%= javascript_pack_tag 'comment' %>
-<%= javascript_pack_tag 'image_upload' %>
+<%= javascript_pack_tag 'cover' %>

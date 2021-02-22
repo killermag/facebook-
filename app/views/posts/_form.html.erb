@@ -1,6 +1,5 @@
-<%= javascript_pack_tag 'image_upload' %> 
 <div class="flex items-center justify-center">
-  <%= form_with model: @post, class: 'bg-white mt-40 w-1/4 rounded-lg shadow-2xl' do |f| %>
+  <%= form_with model: @post, class: 'bg-white mt-40 w-full mx-4 md:mx-0 md:w-2/4 lg:1/4 rounded-lg shadow-2xl' do |f| %>
   
     <% if request.query_parameters[:redirect] %>
       <%= f.hidden_field :redirect, value: false %>
@@ -22,3 +21,4 @@
     </div>
   <% end %>
 </div>
+<%= javascript_pack_tag 'image_upload' %> 

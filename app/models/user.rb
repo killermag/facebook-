@@ -5,15 +5,17 @@ class User < ApplicationRecord
   attr_accessor :login
   attr_reader :genders 
 
-  has_many :posts 
-  has_one_attached :cover 
-  has_one_attached :profile_picture
+  after_create :send_mail
+
+  has_many :posts, dependent: :destroy  
+  has_one_attached :cover, dependent: :destroy  
+  has_one_attached :profile_picture, dependent: :destroy 
   has_many_attached :images 
-  has_many :requests_sent, class_name: 'Friend', foreign_key: :sender  
-  has_many :requests_received, class_name: 'Friend', foreign_key: :receiver 
-  has_many :likes 
+  has_many :requests_sent, class_name: 'Friend', foreign_key: :sender, dependent: :destroy 
+  has_many :requests_received, class_name: 'Friend', foreign_key: :receiver, dependent: :destroy 
+  has_many :likes, dependent: :destroy  
   has_many :liked_posts, through: :likes, source: :post
-  has_many :comments
+  has_many :comments, dependent: :destroy 
   has_many :comment_posts, through: :comments, source: :post 
 
   scope :not_me, ->(me) { where('id <> ?', me.id) }
@@ -29,14 +31,35 @@ class User < ApplicationRecord
   # VALIDATIONS 
 
   validates :gender, :first, :last, presence: true, unless: :updating? 
-  validates_format_of :email, with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/
+  validates_format_of :email, with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/, unless: :blank? 
+
+  def send_mail 
+    UserMailer.with(user: self).after_sign_up_email.deliver_now
+  end 
+
+  def blank? 
+    email == '' ? true : false 
+  end 
 
   def updating? 
     self.persisted? ? true : false 
   end 
 
   def friends 
-    requests_received.where(accepted: true).pluck(:id) + requests_sent.where(accepted: true).pluck(:id) + [self.id]
+    requests_received.where(accepted: true).pluck(:sender_id) + requests_sent.where(accepted: true).pluck(:receiver_id) + [self.id]
+  end 
+
+  def my_friends 
+    array = []
+    received = requests_received.where(accepted: true).includes(:sender)
+    sent = requests_sent.where(accepted: true).includes(:receiver)
+    sent.each do |req| 
+      array << req.receiver
+    end 
+    received.each do |req| 
+      array << req.sender
+    end 
+    array
   end 
 
   # Open metaclass and define the following method 

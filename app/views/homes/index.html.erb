@@ -3,15 +3,15 @@
 <div class="flex Feed">
 
   <!-- left -->
-  <div class=" w-1/4 flex flex-col items-center" >
+  <div class=" w-1/4 hidden md:flex flex-col items-center " >
 
     
 
-    <%= link_to current_user_path, class: 'w-11/12 rounded flex items-center pl-4py-2 mt-2 hover:bg-gray-200 cursor-pointer' do %>
+    <%= link_to current_user_path, class: 'w-11/12 rounded flex items-center pl-1 py-2 mt-2 hover:bg-gray-200 cursor-pointer' do %>
       <% if current_user.profile_picture.attached? %>
         <%= image_tag current_user.profile_picture, class: 'rounded-full h-8 w-8 m-1' %>
       <% else %>
-        <img x="0" y="0" class="rounded-full h-6 w-8" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
+        <img x="0" y="0" class="rounded-full h-8 w-8" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> >
       <% end %>
       <div class="pl-2 text-sm"> <%= current_user.formatted_name%> </div>
     <% end %>
@@ -59,7 +59,7 @@
   </div>
 
   <!-- middle -->
-  <div class="w-1/2 flex flex-col items-center hover:op">
+  <div class="w-full md:w-1/2 flex flex-col items-center hover:op">
 
     <!-- Form to make a new post -->
     <%= form_with model: Post.new, class: 'flex flex-col items-center bg-white border border-solid border-gray-200 shadow rounded p-2 m-2 w-full md:w-3/4 ' do |f| %>
@@ -87,7 +87,7 @@
           <div class="user-name flex ml-4 mt-1 pt-2"> 
             <%= link_to current_user_path do %>
               <% if post.user.profile_picture.attached? %>
-                <%= image_tag post.user.profile_picture, class: 'rounded-full h-7 w-7' %>
+                <%= image_tag post.user.profile_picture, class: 'rounded-full h-6 lg:h-7 w-7' %>
               <% else %>
                 <img x="0" y="0" class="rounded-full h-7 w-7" height="100%" preserveAspectRatio="xMidYMid slice" width="100%" src=<%= User.default_profile_pic %> > 
               <% end %>
@@ -248,7 +248,27 @@
   </div>
 
   <!-- right -->
-  <div class="feed-right bg-yellow-200 w-1/4 flex flex-col items-center" >Lorem, ipsum.</div>
+  <div class="feed-right hidden  w-1/4 md:flex flex-col">
+    <!-- contact declaration -->
+    <div class="ml-6 mt-4 text-lg font-medium text-gray-400">Contacts</div>
+
+    <!-- showing friends -->
+    <div class="flex flex-col  m-4 overflow-y-scroll">
+      <% current_user.my_friends.each do |friend| %>
+        <%= link_to user_path(friend), class: 'h-10 rounded-md  hover:bg-gray-200 flex items-center' do %>
+          <div class="m-2">
+            <% if friend.profile_picture.attached? %>
+              <%= image_tag friend.profile_picture, class: 'w-6 h-6 rounded-full border border-solid border-white' %>
+            <% else %>
+              <%= image_tag User.default_profile_pic, class: 'w-6 h-6 rounded-full border border-solid border-white'  %>
+            <% end %>
+          </div>
+          <div class="m-6 text-base text-gray-900 font-medium"> <%= friend.formatted_name %> </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
 
 </div>
 
