@@ -118,17 +118,17 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.perform_deliveries = true 
-  config.action_mailer.delivery_method = :smtp 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
-    address: 'stmp.gmail.com',
-    port: 587,
-    # SET UP ENV vars ON heroku ssh
-    username: ENV['GMAIL_USERNAME'], 
-    password: ENV['GMAIL_PASSWORD'],
-    authentication: :plain, 
-    enable_starttls_auto: true
-  }
+    address:              'smtp.gmail.com',
+    port:                 587,
+    user_name:            ENV['GMAIL_USERNAME'],
+    password:             ENV['GMAIL_PASSWORD',
+    authentication:       'plain',
+    enable_starttls_auto: true }
 
   config.active_storage.service = :google
 

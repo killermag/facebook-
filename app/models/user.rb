@@ -33,11 +33,7 @@ class User < ApplicationRecord
   validates :gender, :first, :last, presence: true, unless: :updating? 
   validates_format_of :email, with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/, unless: :blank? 
 
-  def send_mail 
-    if self.persisted? && self.valid?(:email )
-      UserMailer.with(user: self).after_sign_up_email.deliver_now
-    end 
-  end 
+  
 
   def blank? 
     email == '' ? true : false 
