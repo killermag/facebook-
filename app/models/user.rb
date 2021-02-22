@@ -34,7 +34,9 @@ class User < ApplicationRecord
   validates_format_of :email, with: /\A([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})\z/, unless: :blank? 
 
   def send_mail 
-    UserMailer.with(user: self).after_sign_up_email.deliver_now
+    if self.persisted? && self.valid?(:email )
+      UserMailer.with(user: self).after_sign_up_email.deliver_now
+    end 
   end 
 
   def blank? 
