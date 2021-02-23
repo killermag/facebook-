@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'likes', to: 'likes#create', as: :likes
   delete 'likes', to: 'likes#destroy'
   
+  get 'users', to: redirect('users/sign_up')
 
 
 end 
